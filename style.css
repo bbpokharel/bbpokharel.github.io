@@ -1,4 +1,20 @@
 /* Core Styles */
+
+ /* Three image containers (use 25% for four, and 50% for two, etc) */
+ .column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+} 
+
+
 .accordion {
   background-color: #eee;
   color: #444;
@@ -168,7 +184,7 @@ p {
   font-weight: bolder;
 }
 
-#section-d .box:first-child {
+#section-d .box {
   background: #2690d4;
 }
 
@@ -192,6 +208,7 @@ p {
   -moz-text-align-last: center;
   text-align-last: center;
   color: #fff;
+  font-size: large;
 }
 
 /* Media Queries */
