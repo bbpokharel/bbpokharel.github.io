@@ -113,16 +113,12 @@ p {
   padding: 0 1.5em;
 }
 
-/* Section 0 */
-.small-font {
-
-}
 
 /* Section A */
 
 #section-a {
-  background: #eaeaea;
-  color: #333;
+  background:#333; 
+  color: #eaeaea;
   padding-bottom: 2em;
 }
 
@@ -152,8 +148,8 @@ p {
 /* Section C */
 
 #section-c {
-  background: #fff;
-  color: #333;
+  background: #333;
+  color: #fff;
   padding: 2em;
 }
 
@@ -164,8 +160,8 @@ p {
 
 /* Section C-1 */
 #section-c-1 {
-  background: #333;
-  color: #fff;
+  color: #333;
+  background: #fff;
   padding: 2em;
   margin-bottom: 0em;
   padding-bottom: 2em;
@@ -173,19 +169,30 @@ p {
 
 /* Section D / Boxes */
 
-#section-d .box {
+#section-d .box:first-child {
   padding: 2em;
   color: #fff;
+  background: #2690d4;
 }
 
-#section-d a {
+#section-d .box:last-child {
+  padding: 2em;
+  color: #333;
+  background:  #fff;
+  text-decoration: underline;
+  list-style: none;
+}
+
+#section-d .box:first-child a {
   text-decoration: none;
   color: #fff;
   font-weight: bolder;
 }
 
-#section-d .box {
-  background: #2690d4;
+#section-d .box:last-child a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bolder;
 }
 
 /* Footer */
@@ -200,15 +207,6 @@ p {
 #main-footer a {
   color: #2690d4;
   text-decoration: none;
-}
-
-/*Custom */
-#justifyAllBullets {
-  text-align: justify;
-  -moz-text-align-last: center;
-  text-align-last: center;
-  color: #fff;
-  font-size: large;
 }
 
 /* Media Queries */
@@ -246,10 +244,33 @@ p {
   #section-b li {
     width: 31%;
   }
+}
 
-  #calendar-frame {
-    width: 800;
-    height: 600;
+/* Responsive iFrame */
+.responsive-iframe-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+.responsive-iframe-container iframe,   
+.vresponsive-iframe-container object,  
+.vresponsive-iframe-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 700px) {
+  .big-container {
+      display: none;
   }
-
+}
+@media (min-width: 700px) {
+  .small-container {
+      display: none;
+  }
 }
