@@ -251,6 +251,7 @@ p {
     float: left;
     height: auto; 
     margin-left: 20vw;
+    vertical-align: middle;
   }
   
   .header-right {
@@ -298,24 +299,19 @@ p {
 	text-align: left;
 }
 .ac-container label{
-	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+	font-family: 'Calibri', 'Arial Narrow', Arial, sans-serif;
 	padding: 5px 20px;
 	position: relative;
 	z-index: 20;
 	display: block;
 	height: 30px;
 	cursor: pointer;
-	color: #777;
+  color:#2690d4;
+  font-weight: 500;
 	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
 	line-height: 33px;
 	font-size: 19px;
-	background: #ffffff;
-	background: -moz-linear-gradient(top, #ffffff 1%, #eaeaea 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#eaeaea));
-	background: -webkit-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
-	background: -o-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
-	background: -ms-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
-	background: linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	background:#FFF;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
 	box-shadow: 
 		0px 0px 0px 1px rgba(155,155,155,0.3), 
@@ -327,8 +323,8 @@ p {
 }
 .ac-container input:checked + label,
 .ac-container input:checked + label:hover{
-	background: #c6e1ec;
-	color: #3d7489;
+	background: #fff;
+	color: #000;
 	text-shadow: 0px 1px 1px rgba(255,255,255, 0.6);
 	box-shadow: 
 		0px 0px 0px 1px rgba(155,155,155,0.3), 
@@ -364,7 +360,6 @@ p {
 	transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
 }
 .ac-container article p{
-	font-style: italic;
 	color: #777;
 	line-height: 23px;
 	font-size: 14px;
@@ -386,5 +381,5 @@ p {
 	height: 180px;
 }
 .ac-container input:checked ~ article.ac-large{
-	height: 180px;
+	height: 160px;
 }
