@@ -71,20 +71,20 @@ p {
 /* Header Showcase */
 
 #showcase {
-  min-height: 450px;
+  min-height: 350px;
   color: #fff;
-  text-align: center;
+  display: flex;
 }
 
 #showcase .bg-image {
-  position: absolute;
+  position: relative;
   background: #333
     url("./pictures/showcase.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 450px;
+  height: 350px;
   z-index: -1;
   opacity: 0.4;
 }
@@ -128,7 +128,9 @@ p {
 .card-content {
   padding: 2em;
 }
-
+.card-title{
+  text-decoration: underline;
+}
 
 /* Section C */
 
@@ -196,8 +198,8 @@ p {
 
 .header-left {
   float: left;
-  height: 450px; 
   text-align: center;
+  padding-left: 0em;
   vertical-align: middle;
 }
 
