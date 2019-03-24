@@ -7,7 +7,8 @@
   <title>BBB Auto School</title>
 </head>
 
-<body>
+<body onload="showSnackbar()">
+  <div id="snackbar">10% off Driver's ED Program for first 15 students! </div>
   <!-- Header Showcase -->
   <header id="showcase" class="grid">
     <div class="bg-image"></div>
@@ -16,11 +17,14 @@
         <img class="header-image" src="./pictures/logo_with_pitch.png" alt="BBB Auto School Logo" />
       </div>
       <div class="header-right">
-        <h2>Notice Board:</h2>
-        <h4>* First 15 students to sign up get a special 10% off!</h4>
-        <h4>* Driver's ED Program starts this Spring Break (April 15 - 19).<br />
-          To register, please call or email us!</h4>
-        <h4>Book your road test with us today! Call now!</h4>
+          <h2>Notice !!            Notice!!              Notice!!</h2>
+
+          <h4>Enrollment is Open for Spring Break Driver's Ed Program<br/>
+          Seats are Limited, Book Early. <br/>
+          The First 15 Enrolled Students will get 10% off on Regular Fee.<br/>
+          To Book your seat Please Call / Email us.</h4>
+          
+          <h4>Take Your Road Test in 2 - 3 Weeks with BBB Auto School!</h4>
       </div>
   </header>
 
@@ -296,6 +300,15 @@
     <div><a href="./resources/Policies.pdf" target="_blank">Terms of Service</a> | <a
         href="./resources/Registration.pdf" target="_blank">Registration</a></div>
   </footer>
+
+  <!-- other fancy stuff -->
+  <script>
+    function showSnackbar() {
+      var x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
+    }
+    </script>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
