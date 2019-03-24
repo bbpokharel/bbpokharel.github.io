@@ -2,9 +2,16 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
   <title>BBB Auto School</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <meta name="description"
+    content="Driving School in Taunton MA helping teens and adults learn driving and go through an affording RMV ceritifed school.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="driving, school, taunton, ma, massachusetts, cheap, affordable, fast, quick, license, road, test, rmv">
+
 </head>
 
 <body onload="showSnackbar()">
@@ -17,14 +24,16 @@
         <img class="header-image" src="./pictures/logo_with_pitch.png" alt="BBB Auto School Logo" />
       </div>
       <div class="header-right">
-          <h2>Notice !!            Notice!!              Notice!!</h2>
+        <h2>Notice !! Notice!! Notice!!</h2>
 
-          <h4>Enrollment is Open for Spring Break Driver's Ed Program<br/>
-          Seats are Limited, Book Early. <br/>
-          The First 15 Enrolled Students will get 10% off on Regular Fee.<br/>
-          To Book your seat Please Call / Email us.</h4>
-          
+        <i>
+          <h4>Enrollment is Open for Spring Break Driver's Ed Program<br />
+            Seats are Limited, Book Early. <br />
+            The First 15 Enrolled Students will get 10% off on Regular Fee.<br />
+            To Book your seat Please Call / Email us.</h4>
+
           <h4>Take Your Road Test in 2 - 3 Weeks with BBB Auto School!</h4>
+        </i>
       </div>
   </header>
 
@@ -306,9 +315,9 @@
     function showSnackbar() {
       var x = document.getElementById("snackbar");
       x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
+      setTimeout(function () { x.className = x.className.replace("show", ""); }, 8000);
     }
-    </script>
+  </script>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
