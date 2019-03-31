@@ -11,9 +11,20 @@
   <meta name="keywords"
     content="driving, school, taunton, ma, massachusetts, cheap, affordable, fast, quick, license, road, test, rmv">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="icon" href="./pictures/favicon.ico">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+  <style>
+    .form-group.required .control-label:after {
+      color: #d00;
+      content: "*";
+      margin-left: 8px;
+      top: 7px;
+      font-family: 'Glyphicons Halflings';
+      font-weight: normal;
+      font-size: 8px;
+    }
+  </style>
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
   <script type="text/javascript">
     (function () {
@@ -24,40 +35,51 @@
   <script type="text/javascript">
     function doEmailSubmit() {
       alert("Submitting form! You will get a copy!");
-      return false;
+
       var template_params = {
-        "name": "name_value",
-        "student_name": "student_name_value",
-        "street_address": "street_address_value",
-        "city": "city_value",
-        "state": "state_value",
-        "zip": "zip_value",
-        "student_email": "student_email_value",
-        "parent_name": "parent_name_value",
-        "parent_email": "parent_email_value",
-        "parent_phone": "parent_phone_value",
-        "home_phone": "home_phone_value",
-        "cell_phone": "cell_phone_value",
-        "best_time_to_call": "best_time_to_call_value",
-        "permit": "permit_value",
-        "dob": "dob_value",
-        "starting_date": "starting_date_value",
-        "notes": "notes_value",
-        "package": "package_value"
+        "student_name": document.getElementById('name').value == null ? '' : document.getElementById('name').value,
+        "street_address": document.getElementById('address').value,
+        "city": document.getElementById('city').value,
+        "state": document.getElementById('state').value,
+        "zip": document.getElementById('zip').value,
+        "student_email": document.getElementById('student_email').value == null ? '' : document.getElementById('student_email').value,
+        "parent_name": document.getElementById('parent_name').value == null ? '' : document.getElementById('parent_name').value,
+        "parent_email": document.getElementById('parent_email').value == null ? '' : document.getElementById('parent_email').value,
+        "parent_phone": document.getElementById('parent_phone').value == null ? '' : document.getElementById('parent_phone').value,
+        "home_phone": document.getElementById('home_phone').value,
+        "cell_phone": document.getElementById('student_cell').value,
+        "best_time_to_call": document.getElementById('best_time_to_call').value == null ? '' : document.getElementById('best_time_to_call').value,
+        "permit": document.getElementById('learners_permit').value == null ? '' : document.getElementById('learners_permit').value,
+        "dob": document.getElementById('dob').value,
+        "starting_date": document.getElementById('starting_date').value,
+        "notes": document.getElementById('notes').value == null ? '' : document.getElementById('notes').value,
+        "package": document.querySelector('input[name="package"]:checked').value
       }
+      console.log(JSON.stringify(template_params));
+      return false;
       var service_id = "default_service";
       var template_id = "registerformemail";
       emailjs.send(service_id, template_id, template_params);
       return false;
     }
+
+    async function makePdf() {
+      var file = './resources/Registration.pdf';
+
+      const loadingTask = PDFJS.getDocument(file);
+      const pdf = await loadingTask.promise;
+
+      alert('loaded pdf');
+    }
+
   </script>
 </head>
 
-<body>
+<body onload="return makePdf()">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">BBB Auto School</a>
+        <a class="navbar-brand" href="index.html">BBB Auto School</a>
       </div>
       <ul class="nav navbar-nav">
         <li><a href="index.html">Home</a></li>
@@ -65,107 +87,127 @@
     </div>
   </nav>
   <div class="container">
-    <img src="pictures/logo.png" style="width: 20%; height: auto"></img>
+    <p class="text-center">
+      <img src="pictures/logo.png" style="width: 20%; height: auto"></img>
+    </p>
     <h2>BBB Auto School Online Registration</h2>
+    <h5>Fields marked with an asterisk are required! </h5>
     <form onsubmit="return doEmailSubmit()">
-      <div class="form-group">
-        <label for="email">Student Name:</label>
-        <input type="text" class="form-control" id="email" placeholder="Enter Full Name" name="name">
+      <div class="form-group required">
+        <label class="control-label" for="student_name">Student Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter Full Name" name="name" required="true">
       </div>
 
       <div class="form-group">
-        <label for="address">Address</label>
+        <label class="control-label" for="address">Address</label>
         <input type="text" class="form-control" id="address" placeholder="Enter Street Address" name="address">
       </div>
 
       <div class="form-group">
-        <label for="city">City</label>
+        <label class="control-label" for="city">City</label>
         <input type="text" class="form-control" id="city" placeholder="City" name="city">
       </div>
-      <div class="form-group">
 
-        <label for="state">State</label>
+      <div class="form-group">
+        <label class="control-label" for="state">State</label>
         <input type="text" class="form-control" id="state" placeholder="MA" name="state" value="MA"></input>
       </div>
-      <div class="form-group">
 
-        <label for="zip">Zip</label>
-        <input type="text" class="form-control" id="zip" placeholder="Enter Street Address" name="zip">
+      <div class="form-group">
+        <label class="control-label" for="zip">Zip</label>
+        <input type="number" class="form-control" id="zip" placeholder="Enter Street Address" name="zip">
+      </div>
+
+      <div class="form-group required">
+        <label class="control-label" for="student_email">Student Email:</label>
+        <input type="email" class="form-control" id="student_email" placeholder="Enter Student Email"
+          name="student_email" required="true">
       </div>
 
       <div class="form-group">
-        <label for="parentName">Student Email:</label>
-        <input type="text" class="form-control" id="parentName" placeholder="Enter Student Email" name="studentName">
+        <label class="control-label" for="home_phone">Home Phone:</label>
+        <input type="text" pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" class="form-control" id="home_phone"
+          placeholder="000-000-0000" title="Must be in format 000-000-0000 with or without dashes" name="home_phone">
+      </div>
+
+      <div class="form-group required">
+        <label class="control-label" for="student_cell">Student Cell Phone:</label>
+        <input type="text" placeholder="000-000-0000" class="form-control" id="student_cell"
+          pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" title="Must be in format 000-000-0000 with or without dashes"
+          name="student_cell" required="true">
       </div>
 
       <div class="form-group">
-        <label for="parentName">Parent Name:</label>
-        <input type="text" class="form-control" id="parentName" placeholder="Enter Parent's Full Name"
-          name="parentName">
+        <label class="control-label" for="parent_name">Parent Name:</label>
+        <input type="text" class="form-control" id="parent_name" placeholder="Enter Parent's Full Name"
+          name="parent_name">
       </div>
 
       <div class="form-group">
-        <label for="parentEmail">Parent Email:</label>
-        <input type="text" class="form-control" id="parentEmail" placeholder="Enter Parent's Email" name="parentEmail">
+        <label class="control-label" for="parent_email">Parent Email:</label>
+        <input type="email" class="form-control" id="parent_email" placeholder="Enter Parent's Email"
+          name="parent_email">
       </div>
 
       <div class="form-group">
-        <label for="parentEmail">Home Phone:</label>
-        <input type="text" class="form-control" id="homePhone" placeholder="Enter Home Phone:" name="homePhone">
-      </div>
-      <div class="form-group">
-        <label for="studentCell">Student Cell Phone:</label>
-        <input type="text" class="form-control" id="studentCell" placeholder="Enter Student Cell:" name="studentCell">
+        <label class="control-label" for="parent_phone">Parent's Phone:</label>
+        <input type="text" class="form-control" itle="Must be in format 000-000-0000 with or without dashes"
+          id="parent_phone" pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" placeholder="000-000-0000" name="parent_phone">
       </div>
 
-      <div class="form-group">
-        <label for="parentEmail">Best Time to Call:</label>
-        <input type="text" class="form-control" id="parentEmail" placeholder="Enter Parent's Email" name="parentEmail">
-      </div>
+
 
       <div class="form-group">
-        <label for="parentEmail">Parent's Phone:</label>
-        <input type="text" class="form-control" id="parentEmail" placeholder="Enter Parent's Email" name="parentEmail">
+        <label class="control-label" for="best_time_to_call">Best Time to Call:</label>
+        <input type="text" class="form-control" id="best_time_to_call" placeholder="Best Time to Call"
+          name="best_time_to_call">
       </div>
-
       <div class="form-group">
-        <label for="parentEmail">Learner's Permit #:</label>
-        <input type="text" class="form-control" id="parentEmail" placeholder="Enter Parent's Email" name="parentEmail">
+        <label class="control-label" for="learners_permit">Learner's Permit #:</label>
+        <input type="text" class="form-control" id="learners_permit" placeholder="Enter Learner's Permit #"
+          name="learners_permit">
       </div>
 
       <div class="form-group form-inline">
-        <label for="parentEmail">Date of Birth:</label>
-        <input type="date" class="form-control" id="homePhone" placeholder="Enter Home Phone:" name="homePhone">
+        <label class="control-label" for="dob">Date of Birth:</label>
+        <input type="date" class="form-control" id="dob" placeholder="Enter DOB" name="dob">
 
-        <label for="studentCell">Starting Date:</label>
-        <input type="text" class="form-control" id="studentCell" placeholder="Enter Student Cell:" name="studentCell">
+        <label class="control-label" for="starting_date">Starting Date:</label>
+        <input type="date" class="form-control" id="starting_date" placeholder="Starting Date" name="starting_date">
       </div>
 
       <div class="form-group">
-        <label for="parentEmail">Notes:</label>
-        <input type="text" class="form-control" id="parentEmail" placeholder="Enter Parent's Email" name="notes">
+        <label class="control-label" for="notes">Notes:</label>
+        <input type="text" class="form-control" id="notes" placeholder="Notes (optional)" name="notes">
       </div>
 
-      <label for="parentEmail">Please choose a package:</label>
+      <label class="control-label" for="package">Please choose a package (see <a target="_blank"
+          href="./resources/Pricing.pdf">Pricing</a>
+        here): <span
+          style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
 
-      <div class="form-group">
-        <input type="radio" name="package" value="driversEd"> Driver's ED Program<br>
+      <div class="form-group required">
+        <input type="radio" name="package" value="driversEdFull" required> Driver's ED Full Package<br>
 
-        <input type="radio" name="package" value="driversEd"> 30 Hours of Classroom Lessons<br>
-        <input type="radio" name="package" value="driversEd"> 12 Hours of Driving Instructions<br>
-        <input type="radio" name="package" value="driversEd"> 6 Hours of Driving Lessons<br>
-        <input type="radio" name="package" value="driversEd"> 1 Hour Lessons<br>
-        <input type="radio" name="package" value="driversEd"> Road Test Sponsorship Fee<br>
-      </div>
-      <br />
-      <div class="checkbox">
-        <label><input type="checkbox" name="agreeToTerms">I have read and agree with the <a
-            href="resources/Policies.pdf" target="_blank">Terms and Conditions</a>.</label>
+        <input type="radio" name="package" value="thirty_hours"> 30 Hours of Classroom Lessons<br>
+        <input type="radio" name="package" value="twelve_hours"> 12 Hours of Driving Instructions<br>
+        <input type="radio" name="package" value="six_hours"> 6 Hours of Driving Lessons<br>
+        <input type="radio" name="package" value="one_hour"> 1 Hour Lessons<br>
+        <input type="radio" name="package" value="road_test"> Road Test Sponsorship<br>
       </div>
       <br />
-      <button type="submit" class="btn btn-default">Register</button>
+      <div class="checkbox" required>
+        <label class="control-label"><input onchange="document.getElementById('register').disabled = !this.checked;"
+            type="checkbox" name="agreeToTerms">I have read and agree with the <a href="resources/Policies.pdf"
+            target="_blank">Terms
+            and Conditions</a>. <span
+            style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+      </div>
+      <br />
+      <button type="submit" id="register" disabled="true" name="register" class="btn btn-default">Register</button>
     </form>
-    <p />
+    <p style="color: white">a</p>
+    <p style="color: white">a</p>
   </div>
 
 
