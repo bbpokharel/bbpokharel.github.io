@@ -56,10 +56,21 @@
         "package": document.querySelector('input[name="package"]:checked').value
       }
       console.log(JSON.stringify(template_params));
-      return false;
       var service_id = "default_service";
-      var template_id = "registerformemail";
-      emailjs.send(service_id, template_id, template_params);
+      var template_id = 'registerformemail';
+
+      var send_it_to_me = true;
+      if (confirm("Would you like to receive a copy of your information in the student email address?")) {
+        send_it_to_me = true;
+      } else {
+        send_it_to_me = false;
+      }
+      return false;
+
+      var status = emailjs.send(service_id, template_id, template_params);
+      console.log("Status is", status);
+
+      alert("Registration Information Saved!")
       return false;
     }
 
