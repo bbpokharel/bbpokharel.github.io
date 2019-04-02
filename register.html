@@ -38,10 +38,7 @@
 
       var template_params = {
         "student_name": document.getElementById('name').value == null ? '' : document.getElementById('name').value,
-        "street_address": document.getElementById('address').value,
-        "city": document.getElementById('city').value,
-        "state": document.getElementById('state').value,
-        "zip": document.getElementById('zip').value,
+        "street_address": document.getElementById('address').value == null ? '' : document.getElementById('address').value,
         "student_email": document.getElementById('student_email').value == null ? '' : document.getElementById('student_email').value,
         "parent_name": document.getElementById('parent_name').value == null ? '' : document.getElementById('parent_name').value,
         "parent_email": document.getElementById('parent_email').value == null ? '' : document.getElementById('parent_email').value,
@@ -53,6 +50,7 @@
         "dob": document.getElementById('dob').value,
         "starting_date": document.getElementById('starting_date').value,
         "notes": document.getElementById('notes').value == null ? '' : document.getElementById('notes').value,
+        "agreed": document.getElementById('agreeToTerms').checked,
         "package": document.querySelector('input[name="package"]:checked').value
       }
       console.log(JSON.stringify(template_params));
@@ -74,19 +72,25 @@
       return false;
     }
 
-    async function makePdf() {
-      var file = './resources/Registration.pdf';
+    function addDashes(item) {
+      if (document.getElementById(item).value) {
+        var num = document.getElementById(item).value.replace(/-/g, "");
 
-      const loadingTask = PDFJS.getDocument(file);
-      const pdf = await loadingTask.promise;
+        var parts = [num.slice(0, 3), num.slice(3, 6), num.slice(6, 10)];
 
-      alert('loaded pdf');
+        var fNum = "";
+        if (parts[2]) { fNum = parts[0] + "-" + parts[1] + "-" + parts[2]; }
+        else if (parts[1]) { fNum = parts[0] + "-" + parts[1]; }
+        else { fNum = parts[0]; }
+
+        document.getElementById(item).value = fNum
+      }
     }
 
   </script>
 </head>
 
-<body onload="return makePdf()">
+<body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -99,98 +103,151 @@
   </nav>
   <div class="container">
     <p class="text-center">
-      <img src="pictures/logo.png" style="width: 20%; height: auto"></img>
+      <img src="pictures/logo.png" style="width: 15%; height: auto"></img>
     </p>
-    <h2>BBB Auto School Online Registration</h2>
+    <h3 class="text-center">Online Registration</h3>
     <h5>Fields marked with an asterisk are required! </h5>
     <form onsubmit="return doEmailSubmit()">
-      <div class="form-group required">
-        <label class="control-label" for="student_name">Student Name:</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter Full Name" name="name" required="true">
-      </div>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="student_name">Student Name: <span
+                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+            </th>
+            <td><input type="text" class="form-control" id="student_name" placeholder="Enter Your Full Name Here"
+                name="name" required="true">
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="address">Address</label>
-        <input type="text" class="form-control" id="address" placeholder="Enter Street Address" name="address">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="address">Address</label>
+            </th>
+            <td>
+              <input type="text" class="form-control" id="address" placeholder="Enter Street Address" name="address">
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="city">City</label>
-        <input type="text" class="form-control" id="city" placeholder="City" name="city">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="student_email">Student Email: <span
+                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+            </th>
+            <td>
+              <input type="email" class="form-control" id="student_email" placeholder="Enter Student Email"
+                name="student_email" required="true">
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="state">State</label>
-        <input type="text" class="form-control" id="state" placeholder="MA" name="state" value="MA"></input>
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="home_phone">Home Phone:</label>
+            </th>
+            <td>
+              <input type="text" pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" class="form-control" id="home_phone"
+                placeholder="000-000-0000" title="Must be in format 000-000-0000 with or without dashes"
+                name="home_phone" onkeypress="return addDashes('home_phone')">
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="zip">Zip</label>
-        <input type="number" class="form-control" id="zip" placeholder="Enter Street Address" name="zip">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="student_cell">Student Cell Phone: <span
+                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+            </th>
+            <td>
+              <input type="text" placeholder="000-000-0000" class="form-control" id="student_cell"
+                pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})"
+                title="Must be in format 000-000-0000 with or without dashes" name="student_cell" required="true"
+                onkeypress="return addDashes('student_cell')">
+            </td>
+          </tr>
 
-      <div class="form-group required">
-        <label class="control-label" for="student_email">Student Email:</label>
-        <input type="email" class="form-control" id="student_email" placeholder="Enter Student Email"
-          name="student_email" required="true">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="parent_name">Parent Name:</label>
+            </th>
+            <td>
+              <input type="text" class="form-control" id="parent_name" placeholder="Enter Parent's Full Name"
+                name="parent_name">
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="home_phone">Home Phone:</label>
-        <input type="text" pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" class="form-control" id="home_phone"
-          placeholder="000-000-0000" title="Must be in format 000-000-0000 with or without dashes" name="home_phone">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="parent_email">Parent Email:</label>
+            </th>
+            <td>
+              <input type="email" class="form-control" id="parent_email" placeholder="Enter Parent's Email"
+                name="parent_email">
+            </td>
+          </tr>
 
-      <div class="form-group required">
-        <label class="control-label" for="student_cell">Student Cell Phone:</label>
-        <input type="text" placeholder="000-000-0000" class="form-control" id="student_cell"
-          pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" title="Must be in format 000-000-0000 with or without dashes"
-          name="student_cell" required="true">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="parent_phone">Parent's Phone:</label>
+            </th>
+            <td>
+              <input type="text" class="form-control" 
+                title="Must be in format 000-000-0000 with or without dashes" id="parent_phone"
+                pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" placeholder="000-000-0000" name="parent_phone"
+                onkeypress="return addDashes('parent_phone')">
 
-      <div class="form-group">
-        <label class="control-label" for="parent_name">Parent Name:</label>
-        <input type="text" class="form-control" id="parent_name" placeholder="Enter Parent's Full Name"
-          name="parent_name">
-      </div>
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="parent_email">Parent Email:</label>
-        <input type="email" class="form-control" id="parent_email" placeholder="Enter Parent's Email"
-          name="parent_email">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="best_time_to_call">Best Time to Call:</label>
+            </th>
+            <td>
+              <input type="text" class="form-control" id="best_time_to_call" placeholder="Best Time to Call"
+                name="best_time_to_call">
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="parent_phone">Parent's Phone:</label>
-        <input type="text" class="form-control" itle="Must be in format 000-000-0000 with or without dashes"
-          id="parent_phone" pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" placeholder="000-000-0000" name="parent_phone">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="learners_permit">Learner's Permit #:</label>
+            </th>
+            <td>
+              <input type="text" class="form-control" id="learners_permit" placeholder="Enter Learner's Permit #"
+                name="learners_permit">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="dob">Date of Birth:</label>
+            </th>
+            <td>
+              <input type="date" class="form-control" id="dob" placeholder="Enter DOB" name="dob">
+            </td>
+          </tr>
 
 
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="starting_date">Starting Date:</label>
+            </th>
+            <td>
+              <input type="date" class="form-control" id="starting_date" placeholder="Starting Date"
+                name="starting_date">
+            </td>
+          </tr>
 
-      <div class="form-group">
-        <label class="control-label" for="best_time_to_call">Best Time to Call:</label>
-        <input type="text" class="form-control" id="best_time_to_call" placeholder="Best Time to Call"
-          name="best_time_to_call">
-      </div>
-      <div class="form-group">
-        <label class="control-label" for="learners_permit">Learner's Permit #:</label>
-        <input type="text" class="form-control" id="learners_permit" placeholder="Enter Learner's Permit #"
-          name="learners_permit">
-      </div>
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="notes">Notes:</label> </th>
+            <td>
+              <input type="text" class="form-control" id="notes" placeholder="Notes (optional)" name="notes">
 
-      <div class="form-group form-inline">
-        <label class="control-label" for="dob">Date of Birth:</label>
-        <input type="date" class="form-control" id="dob" placeholder="Enter DOB" name="dob">
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-        <label class="control-label" for="starting_date">Starting Date:</label>
-        <input type="date" class="form-control" id="starting_date" placeholder="Starting Date" name="starting_date">
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" for="notes">Notes:</label>
-        <input type="text" class="form-control" id="notes" placeholder="Notes (optional)" name="notes">
-      </div>
 
       <label class="control-label" for="package">Please choose a package (see <a target="_blank"
           href="./resources/Pricing.pdf">Pricing</a>
