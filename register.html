@@ -34,41 +34,32 @@
 
   <script type="text/javascript">
     function doEmailSubmit() {
-      alert("Submitting form! You will get a copy!");
-
       var template_params = {
-        "student_name": document.getElementById('name').value == null ? '' : document.getElementById('name').value,
+        "student_name": document.getElementById('student_name').value == null ? '' : document.getElementById('student_name').value,
         "street_address": document.getElementById('address').value == null ? '' : document.getElementById('address').value,
+        "home_phone": document.getElementById('home_phone').value,
+        "cell_phone": document.getElementById('student_cell').value,
         "student_email": document.getElementById('student_email').value == null ? '' : document.getElementById('student_email').value,
+        
         "parent_name": document.getElementById('parent_name').value == null ? '' : document.getElementById('parent_name').value,
         "parent_email": document.getElementById('parent_email').value == null ? '' : document.getElementById('parent_email').value,
         "parent_phone": document.getElementById('parent_phone').value == null ? '' : document.getElementById('parent_phone').value,
-        "home_phone": document.getElementById('home_phone').value,
-        "cell_phone": document.getElementById('student_cell').value,
+        
         "best_time_to_call": document.getElementById('best_time_to_call').value == null ? '' : document.getElementById('best_time_to_call').value,
         "permit": document.getElementById('learners_permit').value == null ? '' : document.getElementById('learners_permit').value,
         "dob": document.getElementById('dob').value,
         "starting_date": document.getElementById('starting_date').value,
         "notes": document.getElementById('notes').value == null ? '' : document.getElementById('notes').value,
-        "agreed": document.getElementById('agreeToTerms').checked,
-        "package": document.querySelector('input[name="package"]:checked').value
+        
+        "package": document.querySelector('input[name="package"]:checked').value,
+        "agreed": document.getElementById('agreeToTerms').checked
       }
-      console.log(JSON.stringify(template_params));
       var service_id = "default_service";
       var template_id = 'registerformemail';
 
-      var send_it_to_me = true;
-      if (confirm("Would you like to receive a copy of your information in the student email address?")) {
-        send_it_to_me = true;
-      } else {
-        send_it_to_me = false;
-      }
-      return false;
-
       var status = emailjs.send(service_id, template_id, template_params);
-      console.log("Status is", status);
 
-      alert("Registration Information Saved!")
+      alert("Registration Information Saved! If you don't hear back from us in 48 hours, please give us a call!")
       return false;
     }
 
@@ -189,10 +180,9 @@
               <label class="control-label" for="parent_phone">Parent's Phone:</label>
             </th>
             <td>
-              <input type="text" class="form-control" 
-                title="Must be in format 000-000-0000 with or without dashes" id="parent_phone"
-                pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" placeholder="000-000-0000" name="parent_phone"
-                onkeypress="return addDashes('parent_phone')">
+              <input type="text" class="form-control" title="Must be in format 000-000-0000 with or without dashes"
+                id="parent_phone" pattern="(\d{3}[\-]\d{3}[\-]\d{4})|(\d{10})" placeholder="000-000-0000"
+                name="parent_phone" onkeypress="return addDashes('parent_phone')">
 
             </td>
           </tr>
@@ -266,7 +256,7 @@
       <br />
       <div class="checkbox" required>
         <label class="control-label"><input onchange="document.getElementById('register').disabled = !this.checked;"
-            type="checkbox" name="agreeToTerms">I have read and agree with the <a href="resources/Policies.pdf"
+            type="checkbox" name="agreeToTerms" id="agreeToTerms">I have read and agree with the <a href="resources/Policies.pdf"
             target="_blank">Terms
             and Conditions</a>. <span
             style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
