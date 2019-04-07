@@ -34,24 +34,26 @@
 
   <script type="text/javascript">
     function doEmailSubmit() {
+      var packageText = getSelectedPackageForSubmit();
       var template_params = {
         "student_name": document.getElementById('student_name').value == null ? '' : document.getElementById('student_name').value,
         "street_address": document.getElementById('address').value == null ? '' : document.getElementById('address').value,
         "home_phone": document.getElementById('home_phone').value,
         "cell_phone": document.getElementById('student_cell').value,
         "student_email": document.getElementById('student_email').value == null ? '' : document.getElementById('student_email').value,
-        
+
         "parent_name": document.getElementById('parent_name').value == null ? '' : document.getElementById('parent_name').value,
         "parent_email": document.getElementById('parent_email').value == null ? '' : document.getElementById('parent_email').value,
         "parent_phone": document.getElementById('parent_phone').value == null ? '' : document.getElementById('parent_phone').value,
-        
+
         "best_time_to_call": document.getElementById('best_time_to_call').value == null ? '' : document.getElementById('best_time_to_call').value,
         "permit": document.getElementById('learners_permit').value == null ? '' : document.getElementById('learners_permit').value,
         "dob": document.getElementById('dob').value,
         "starting_date": document.getElementById('starting_date').value,
         "notes": document.getElementById('notes').value == null ? '' : document.getElementById('notes').value,
-        
-        "package": document.querySelector('input[name="package"]:checked').value,
+
+        "package": packageText,
+        "agreedToPrice": document.getElementById('agreedToPrice').checked,
         "agreed": document.getElementById('agreeToTerms').checked
       }
       var service_id = "default_service";
@@ -78,10 +80,181 @@
       }
     }
 
+    function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+      });
+      return vars;
+    }
+
+    function getUrlParam(parameter, defaultvalue) {
+      var urlparameter = defaultvalue;
+      if (window.location.href.indexOf(parameter) > -1) {
+        urlparameter = getUrlVars()[parameter];
+      }
+      return urlparameter;
+    }
+    function updatePrivatePrice() {
+      var e = document.getElementById("privatePackageHours");
+      var hours = e.options[e.selectedIndex].text;
+      var finalPrice = 50 * hours;
+      if (!(isNaN(finalPrice))) {
+        document.getElementById("finalPrice").innerHTML = "$" + finalPrice + ".00";
+      } else {
+        document.getElementById("finalPrice").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+      }
+    }
+    function getPrivatePackage() {
+      const deal = `
+        <h5>10% off Regular Price for sessions over 6 Hours!</h5>
+        <h4>
+          <table class="table">
+            <tr>
+              <td>Private Package</td>
+              <td>$50.00 x 
+                <select id="privatePackageHours" name="privatePackageHours" onchange="return updatePrivatePrice()">
+                  <option value="1" selected="selected">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="6+">6+</option>
+                </select> 
+                hour(s)
+              </td>
+              <td>
+                <p name="finalPrice" id="finalPrice" style="width:200">$50.00</p>
+              </td>
+          </table>
+        </h4>
+      `;
+      document.getElementById('packageSection').innerHTML = deal;
+    }
+    function updateDriversPackage() {
+      var e = document.getElementById("driversPackage");
+      var option = e.options[e.selectedIndex].value;
+
+      if (option == "fullPackage") {
+        document.getElementById("finalPrice").innerHTML = "$699.00";
+      }
+      else if (option == "30Hours") {
+        document.getElementById("finalPrice").innerHTML = "$250.00";
+      }
+      else if (option == "12Hours") {
+        document.getElementById("finalPrice").innerHTML = "$540.00";
+      }
+      else if (option == "6Hours") {
+        document.getElementById("finalPrice").innerHTML = "$270.00";
+      }
+    }
+    function getDriversEdPackage() {
+      const deal = `
+        <h4>
+          <table class="table">
+            <tr>
+              <td>Driver's ED Program </td>
+              <td>
+                <select id="driversPackage" name="driversPackage" onchange="return updateDriversPackage()">
+                  <option value="fullPackage" selected="selected">Full Package</option>
+                  <option value="30Hours">30 Hours Classroom Lessons</option>
+                  <option value="12Hours">12 Hours Driving Instruction</option>
+                  <option value="6Hours">6 Hours Driving Lessons</option>
+                </select>
+              </td>
+              <td>
+                <p name="finalPrice" id="finalPrice" style="width:200">$699.00</p>
+              </td>
+          </table>
+        </h4>
+      `;
+      document.getElementById('packageSection').innerHTML = deal;
+    }
+    function getRoadTestPackage() {
+      const deal = `
+        <h4>
+          <table class="table">
+            <tr>
+              <td>
+               Road Test Sponsorship
+              </td>
+              <td>
+                <p name="finalPrice" id="finalPrice" style="width:200">$120.00</p>
+              </td>
+          </table>
+        </h4>
+      `;
+      document.getElementById('packageSection').innerHTML = deal;
+    }
+    function noPackage() {
+      const deal = `
+        <h4>
+          <table class="table">
+            <tr>
+              <td>
+               No Package Selected
+              </td>
+              <td>
+                <p name="finalPrice" id="finalPrice" style="width:200"></p>
+              </td>
+          </table>
+        </h4>
+      `;
+      document.getElementById('packageSection').innerHTML = deal;
+    }
+
+    function getSelectedPackageForSubmit() {
+      var optionChosen = getUrlParam('package', 'Empty');
+      var output = "";
+
+      if (optionChosen == "privatePackage") {
+        var e = document.getElementById("privatePackageHours");
+        var hours = e.options[e.selectedIndex].text;
+        output = "Private Package - " + hours + " hours"
+      }
+      else if (optionChosen == "driversEdPackage") {
+        var e = document.getElementById("driversPackage");
+        var packages = e.options[e.selectedIndex].text;
+        output = "Driver's ED Program - " + packages;
+      }
+      else if (optionChosen == "roadTestPackage") {
+        output = "Road Test Sponsorship";
+      } else {
+        output = "None!";
+      }
+      return output;
+    }
+    function getPackageDetails() {
+      var package = getUrlParam('package', 'Empty');
+
+      if (package == "privatePackage") {
+        return getPrivatePackage();
+      }
+      else if (package == "roadTestPackage") {
+        return getRoadTestPackage();
+      }
+      else if (package == "driversEdPackage") {
+        return getDriversEdPackage();
+      } else {
+
+        document.getElementById("agreeToTerms").disabled = true;
+        return noPackage();
+      }
+
+    }
+
+    function enableRegisterButton() {
+      if (document.getElementById('agreedToPrice').checked && document.getElementById('agreeToTerms').checked) {
+        document.getElementById('register').disabled = false;
+      } else {
+        document.getElementById('register').disabled = true;
+      }
+    }
   </script>
 </head>
 
-<body>
+<body onload="return getPackageDetails()">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -237,27 +410,21 @@
           </tr>
         </tbody>
       </table>
+      <div>
+        <h3>Selected Package:</h1>
+          <div id="packageSection" name="packageSection">
 
-
-      <label class="control-label" for="package">Please choose a package (see <a target="_blank"
-          href="./resources/Pricing.pdf">Pricing</a>
-        here): <span
-          style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
-
-      <div class="form-group required">
-        <input type="radio" name="package" value="driversEdFull" required> Driver's ED Full Package<br>
-
-        <input type="radio" name="package" value="thirty_hours"> 30 Hours of Classroom Lessons<br>
-        <input type="radio" name="package" value="twelve_hours"> 12 Hours of Driving Instructions<br>
-        <input type="radio" name="package" value="six_hours"> 6 Hours of Driving Lessons<br>
-        <input type="radio" name="package" value="one_hour"> 1 Hour Lessons<br>
-        <input type="radio" name="package" value="road_test"> Road Test Sponsorship<br>
+          </div>
       </div>
-      <br />
       <div class="checkbox" required>
-        <label class="control-label"><input onchange="document.getElementById('register').disabled = !this.checked;"
-            type="checkbox" name="agreeToTerms" id="agreeToTerms">I have read and agree with the <a href="resources/Policies.pdf"
-            target="_blank">Terms
+        <label class="control-label"><input onchange="return enableRegisterButton()" type="checkbox" name="agreedToPrice" id="agreedToPrice">I have reviewed and
+          agree upon the price shown above!<span
+            style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+      </div>
+
+      <div class="checkbox" required>
+        <label class="control-label"><input onchange="return enableRegisterButton()" type="checkbox" name="agreeToTerms" id="agreeToTerms">I have read and agree
+          with the <a href="resources/Policies.pdf" target="_blank">Terms
             and Conditions</a>. <span
             style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
       </div>
