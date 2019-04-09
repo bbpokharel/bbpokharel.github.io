@@ -98,7 +98,13 @@
     function updatePrivatePrice() {
       var e = document.getElementById("privatePackageHours");
       var hours = e.options[e.selectedIndex].text;
-      var finalPrice = 50 * hours;
+      var priceToUse = 50;
+
+      var finalPrice = priceToUse * hours;
+
+      if (hours == 6) {
+        finalPrice = 270;
+      }
       if (!(isNaN(finalPrice))) {
         document.getElementById("finalPrice").innerHTML = "$" + finalPrice + ".00";
       } else {
@@ -120,7 +126,6 @@
                   <option value="4">4</option>
                   <option value="5">5</option>
                   <option value="6">6</option>
-                  <option value="6+">6+</option>
                 </select> 
                 hour(s)
               </td>
@@ -204,6 +209,34 @@
       document.getElementById('packageSection').innerHTML = deal;
     }
 
+    function getNonRoadTestTerms() {
+      var content = `<label class="control-label"><input onchange="return enableRegisterButton()" type="checkbox" name="agreeToTerms"
+            id="agreeToTerms">I have read and agree
+          with the <a href="resources/Policies.pdf" target="_blank">Terms
+            and Conditions</a>. <span
+            style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+      `;
+      return content;
+    }
+    function getRoadTestTerms() {
+      var content = `
+        <br />
+        <h4>Terms and Conditions</h4>
+        <p>The RMV may cancel the road test schedule due to savers weather, state emergency and any other reasons, BBB Auto School does not have any controls on that, to make sure about your appointment please check with RMV. If RMV cancel appointment, you can make another appointment.</p>
+        <p>Road test sponsorship fee does not include RMV Fees.</p>
+        <p>Once booked for sponsorship with BBB Auto School no cancellation can be made within 72 hours.</p>
+        <p>Student Driver should be on time for road test. if you late more than 15 minutes, will be marked as no show, resulting missed road test and no money will be refunded.</p>
+        <label class="control-label"><input onchange="return enableRegisterButton()" type="checkbox" name="agreeToTerms"
+            id="agreeToTerms">I have read and agree
+          with the Terms
+            and Conditions. <span
+            style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+      
+      `;
+      return content;
+
+    }
+
     function getSelectedPackageForSubmit() {
       var optionChosen = getUrlParam('package', 'Empty');
       var output = "";
@@ -228,10 +261,14 @@
     function getPackageDetails() {
       var package = getUrlParam('package', 'Empty');
 
+      document.getElementById("termsAndConditions").innerHTML = getNonRoadTestTerms();
+
       if (package == "privatePackage") {
         return getPrivatePackage();
       }
       else if (package == "roadTestPackage") {
+
+        document.getElementById("termsAndConditions").innerHTML = getRoadTestTerms();
         return getRoadTestPackage();
       }
       else if (package == "driversEdPackage") {
@@ -417,16 +454,14 @@
           </div>
       </div>
       <div class="checkbox" required>
-        <label class="control-label"><input onchange="return enableRegisterButton()" type="checkbox" name="agreedToPrice" id="agreedToPrice">I have reviewed and
+        <label class="control-label"><input onchange="return enableRegisterButton()" type="checkbox"
+            name="agreedToPrice" id="agreedToPrice">I have reviewed and
           agree upon the price shown above!<span
             style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
       </div>
 
-      <div class="checkbox" required>
-        <label class="control-label"><input onchange="return enableRegisterButton()" type="checkbox" name="agreeToTerms" id="agreeToTerms">I have read and agree
-          with the <a href="resources/Policies.pdf" target="_blank">Terms
-            and Conditions</a>. <span
-            style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+      <div class="checkbox" required id="termsAndConditions">
+
       </div>
       <br />
       <button type="submit" id="register" disabled="true" name="register" class="btn btn-default">Register</button>
