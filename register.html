@@ -102,9 +102,6 @@
 
       var finalPrice = priceToUse * hours;
 
-      if (hours == 6) {
-        finalPrice = 270;
-      }
       if (!(isNaN(finalPrice))) {
         document.getElementById("finalPrice").innerHTML = "$" + finalPrice + ".00";
       } else {
@@ -165,7 +162,6 @@
                   <option value="fullPackage" selected="selected">Full Package</option>
                   <option value="30Hours">30 Hours Classroom Lessons</option>
                   <option value="12Hours">12 Hours Driving Instruction</option>
-                  <option value="6Hours">6 Hours Driving Lessons</option>
                 </select>
               </td>
               <td>
@@ -323,10 +319,10 @@
 
           <tr>
             <th scope="row">
-              <label class="control-label" for="address">Address</label>
+              <label class="control-label" for="address">Full Address (including City, Zip):</label>
             </th>
             <td>
-              <input type="text" class="form-control" id="address" placeholder="Enter Street Address" name="address">
+              <input type="text" class="form-control" id="address" placeholder="Enter Full Address" name="address">
             </td>
           </tr>
 
@@ -439,9 +435,9 @@
 
           <tr>
             <th scope="row">
-              <label class="control-label" for="notes">Notes:</label> </th>
+              <label class="control-label" for="notes">Comments:</label> </th>
             <td>
-              <input type="text" class="form-control" id="notes" placeholder="Notes (optional)" name="notes">
+              <input type="text" class="form-control" id="notes" placeholder="Comments (optional)" name="notes">
 
             </td>
           </tr>
