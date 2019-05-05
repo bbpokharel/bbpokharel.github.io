@@ -106,6 +106,10 @@ function updatePrivatePrice() {
   var priceToUse = 50;
 
   var finalPrice = priceToUse * hours;
+  
+  if (hours == "6") {
+   finalPrice = 270; 
+  }
 
   if (!(isNaN(finalPrice))) {
     document.getElementById("finalPrice").innerHTML = "$" + finalPrice + ".00";
