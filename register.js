@@ -31,10 +31,11 @@ function doEmailSubmitFull() {
     "agreedToPrice": document.getElementById('agreedToPrice').checked,
     "agreed": document.getElementById('agreeToTerms').checked
   }
-  var service_id = "gmail";
+  var service_id = "default_service";
   var template_id = 'registerformemail';
 
-  var status = emailjs.send(service_id, template_id, template_params);
+  var status = emailjs.send(service_id, template_id, template_params).then(function(result) { console.log("result is", result)});
+  console.log("status", status);
 
   alert("Registration Information Saved! If you don't hear back from us in 48 hours, please give us a call!")
   return false;
@@ -61,10 +62,11 @@ function doEmailSubmitMini() {
     "agreedToPrice": document.getElementById('agreedToPrice').checked,
     "agreed": document.getElementById('agreeToTerms').checked
   }
-  var service_id = "gmail";
+  var service_id = "default_service";
   var template_id = 'RoadTestPackage';
   
-  var status = emailjs.send(service_id, template_id, template_params);
+  var status = emailjs.send(service_id, template_id, template_params).then(function(result) { console.log("result is", result)});
+  console.log("status", status);
 
   alert("Registration Information Saved! If you don't hear back from us in 48 hours, please give us a call!")
   return false;
