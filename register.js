@@ -31,7 +31,7 @@ function doEmailSubmitFull() {
     "agreedToPrice": document.getElementById('agreedToPrice').checked,
     "agreed": document.getElementById('agreeToTerms').checked
   }
-  var service_id = "default_service";
+  var service_id = "gmail";
   var template_id = 'registerformemail';
 
   var status = emailjs.send(service_id, template_id, template_params);
@@ -61,7 +61,7 @@ function doEmailSubmitMini() {
     "agreedToPrice": document.getElementById('agreedToPrice').checked,
     "agreed": document.getElementById('agreeToTerms').checked
   }
-  var service_id = "default_service";
+  var service_id = "gmail";
   var template_id = 'RoadTestPackage';
   
   var status = emailjs.send(service_id, template_id, template_params);
