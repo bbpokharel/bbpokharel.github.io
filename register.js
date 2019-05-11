@@ -63,7 +63,9 @@ function doEmailSubmitMini() {
     "agreed": document.getElementById('agreeToTerms').checked
   }
   var service_id = "default_service";
-  var template_id = 'RoadTestPackage';
+  var template_id = 'roadtestpackage';
+
+  console.log(template_params);
   
   var status = emailjs.send(service_id, template_id, template_params).then(function(result) { console.log("result is", result)});
   console.log("status", status);
