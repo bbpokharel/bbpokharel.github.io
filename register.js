@@ -155,7 +155,7 @@ function updateDriversPackage() {
     document.getElementById("finalPrice").innerHTML = "$699.00";
   }
   else if (option == "30Hours") {
-    document.getElementById("finalPrice").innerHTML = "$250.00";
+    document.getElementById("finalPrice").innerHTML = "$199.00";
   }
   else if (option == "12Hours") {
     document.getElementById("finalPrice").innerHTML = "$540.00";
