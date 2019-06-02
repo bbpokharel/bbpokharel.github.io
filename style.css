@@ -154,6 +154,7 @@ p {
   padding: 2em;
   margin-bottom: 0em;
   padding-bottom: 2em;
+  margin: 0 auto;
 }
 
 /* Section D / Boxes */
@@ -432,4 +433,21 @@ p {
 @keyframes fadeout {
   from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
+}
+
+@media all and (max-width:500px){
+  table{
+      width:100%;
+  }
+
+  td{
+      display:block;
+      width:100%;
+      border-left: 0px solid white;
+  }
+
+  tr{
+      display:block;
+      margin-bottom:30px;
+  }
 }

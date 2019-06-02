@@ -38,6 +38,7 @@ function doEmailSubmitFull() {
   console.log("status", status);
 
   alert("Registration Information Saved! If you don't hear back from us in 48 hours, please give us a call!")
+  window.location.replace("https://www.bbbautoschool.com/");
   return false;
 }
 
@@ -71,6 +72,7 @@ function doEmailSubmitMini() {
   console.log("status", status);
 
   alert("Registration Information Saved! If you don't hear back from us in 48 hours, please give us a call!")
+  window.location.replace("https://www.bbbautoschool.com/");
   return false;
 }
 
