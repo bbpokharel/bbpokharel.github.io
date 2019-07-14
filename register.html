@@ -58,8 +58,10 @@
         <tbody>
           <tr>
             <th scope="row">
-              <label class="control-label" for="student_name">Student Name: <span
-                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span></label>
+              <label class="control-label" for="student_name">Student Name:
+                <span
+                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span>
+              </label>
             </th>
             <td><input type="text" class="form-control" id="student_name" placeholder="Enter Your Full Name Here"
                 name="name" required="true">
@@ -68,10 +70,38 @@
 
           <tr>
             <th scope="row">
-              <label class="control-label" for="address">Full Address (including City, Zip):</label>
+              <label class="control-label" for="address">Street Address
+                <span
+                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span>
+              </label>
             </th>
             <td>
-              <input type="text" class="form-control" id="address" placeholder="Enter Full Address, City, and Zip" name="address">
+              <input type="text" class="form-control" id="address" placeholder="Enter Full Address, City, and Zip"
+                name="address" required="true">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="city">City
+                <span
+                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span>
+              </label>
+            </th>
+            <td>
+              <input type="text" class="form-control" id="city" placeholder="Enter City" name="zip" required="true">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">
+              <label class="control-label" for="zip">Zip Code
+                <span
+                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span>
+              </label>
+            </th>
+            <td>
+              <input type="text" class="form-control" id="zip" placeholder="Enter Zip Code" name="zip" required="true">
             </td>
           </tr>
 
@@ -161,7 +191,8 @@
               </label>
             </th>
             <td>
-              <input type="text" class="form-control" placeholder="Enter Learner's Permit #" id="learners_permit" name="learners_permit">
+              <input type="text" class="form-control" placeholder="Enter Learner's Permit #" id="learners_permit"
+                name="learners_permit">
             </td>
           </tr>
 
@@ -169,7 +200,7 @@
             <th scope="row">
               <label class="control-label" for="dob">Date of Birth:</label>
               <span id="permitRequiredFlag"
-                  style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span>
+                style="color: #d00;font-family: 'Glyphicons Halflings'; font-weight: normal;font-size: 8px;">*</span>
             </th>
             <td>
               <input type="date" class="form-control" id="dob" placeholder="Enter DOB" name="dob" required="true">
@@ -195,13 +226,14 @@
 
             </td>
           </tr>
-          
+
           <tr id="roadTestDateRow">
             <th scope="row">
               <label class="control-label" for="road_test_date">Road Test Date:</label>
             </th>
             <td>
-              <input type="date" class="form-control" id="road_test_date" placeholder="Enter Road Test Date" name="road_test_date">
+              <input type="date" class="form-control" id="road_test_date" placeholder="Enter Road Test Date"
+                name="road_test_date">
             </td>
           </tr>
 
@@ -210,7 +242,8 @@
               <label class="control-label" for="road_test_time">Road Test Time: </label>
             </th>
             <td>
-                <input type="text" class="form-control" id="road_test_time" placeholder="Road Test Time" name="road_test_time" /> </td>
+              <input type="text" class="form-control" id="road_test_time" placeholder="Road Test Time"
+                name="road_test_time" /> </td>
           </tr>
 
           <tr id="roadTestLocationRow">
@@ -218,7 +251,8 @@
               <label class="control-label" for="road_test_location">Road Test Location: </label>
             </th>
             <td>
-                <input type="text" class="form-control" id="road_test_location" placeholder="Road Test Location" name="road_test_location" />
+              <input type="text" class="form-control" id="road_test_location" placeholder="Road Test Location"
+                name="road_test_location" />
             </td>
           </tr>
 

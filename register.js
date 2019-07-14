@@ -13,6 +13,8 @@ function doEmailSubmitFull() {
   var template_params = {
     "student_name": document.getElementById('student_name').value == null ? '' : document.getElementById('student_name').value,
     "street_address": document.getElementById('address').value == null ? '' : document.getElementById('address').value,
+    "city": document.getElementById('city').value == null ? '' : document.getElementById('city').value,
+    "zip": document.getElementById('zip').value == null ? '' : document.getElementById('zip').value,
     "home_phone": document.getElementById('home_phone').value,
     "cell_phone": document.getElementById('student_cell').value,
     "student_email": document.getElementById('student_email').value == null ? '' : document.getElementById('student_email').value,
@@ -47,6 +49,8 @@ function doEmailSubmitMini() {
   var template_params = {
     "student_name": document.getElementById('student_name').value == null ? '' : document.getElementById('student_name').value,
     "street_address": document.getElementById('address').value == null ? '' : document.getElementById('address').value,
+    "city": document.getElementById('city').value == null ? '' : document.getElementById('city').value,
+    "zip": document.getElementById('zip').value == null ? '' : document.getElementById('zip').value,
     "cell_phone": document.getElementById('student_cell').value,
     "student_email": document.getElementById('student_email').value == null ? '' : document.getElementById('student_email').value,
 
